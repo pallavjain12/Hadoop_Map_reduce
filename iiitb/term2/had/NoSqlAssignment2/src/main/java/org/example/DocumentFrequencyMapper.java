@@ -24,7 +24,7 @@ public class DocumentFrequencyMapper extends Mapper<LongWritable, Text, Text, In
         String line = value.toString();
         String[] words = line.split("\\s+");
 
-        File file = new File("/home/hadoop/stopwords.txt");
+        File file = new File(context.getConfiguration().get("filePath"));
         Set<String> set = new HashSet<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         String tempString = br.readLine();

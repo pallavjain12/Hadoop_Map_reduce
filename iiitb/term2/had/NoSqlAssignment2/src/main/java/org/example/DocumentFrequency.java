@@ -11,12 +11,15 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class DocumentFrequency {
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
-            System.out.println("Please provide 2 arguments\n1. Path to folder where all files are\n2. Output file path");
+        if (args.length != 3) {
+            System.out.println("Please provide 3 arguments\n1. Path to folder where all files are in hadoop fs\n2. Output file path in hadoop fs\n3. Path to stopwords.txt in local file system\n");
             System.exit(0);
         }
 
         Configuration conf = new Configuration();
+
+        conf.set("filePath", args[2]);
+
         Job job = Job.getInstance(conf, "document frequency");
         job.setJarByClass(DocumentFrequency.class);
         job.setMapperClass(DocumentFrequencyMapper.class);
